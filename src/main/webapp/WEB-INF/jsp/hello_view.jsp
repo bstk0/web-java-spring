@@ -1,5 +1,6 @@
 <html>
-  <h1>Beta - hello_view.jsp</h1>
+  <h1>Beta</h1>
+  <h2>hello_view.jsp</h2>
   <body bgcolor="white">
     <div style="font-size: 150%; color: #850F0F">
       <span>Enter your name: </span><br />
