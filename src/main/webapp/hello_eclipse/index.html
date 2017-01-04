@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+ <head>
+ <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+ <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+ <title>Hello World</title>
+
+ <!-- Carregando o UI5 instalado localmente
+ <script id='sap-ui-bootstrap'
+ src='../../../openui5-sdk/resources/sap-ui-core.js'
+ data-sap-ui-theme='sap_bluecrystal'
+ data-sap-ui-libs='sap.ui.commons'>
+ </script>
+ -->
+
+ <!-- Carregando o UI5 a partir de CDN -->
+ <script id='sap-ui-bootstrap'
+ src='https://openui5.hana.ondemand.com/resources/sap-ui-core.js'
+ data-sap-ui-theme='sap_bluecrystal'
+ data-sap-ui-libs='sap.ui.commons,sap.ui.table'
+ data-sap-ui-libs='sap.ui.commons'>
+ </script>
+
+<!-- teste - forcei -->
+<script id='hello_eclipse_view' src='main.view.js'></script>
+<script id='hello_eclipse_controller' src='main.controller.js'></script>
+
+ <script>
+     sap.ui.localResources("hello_eclipse");
+    var view = sap.ui.view({
+    id:"idmain1",
+    viewName:"hello_eclipse.main",
+    type:sap.ui.core.mvc.ViewType.JS
+    });
+    view.placeAt("content");
+ </script>
+
+ </head>
+
+
+ <body class='sapUiBody'>
+
+ <div id="content" data-sap-ui-area="content">
+<!--
+<span
+    id="__view0"
+    data-sap-ui="__view0"
+    title="Hello World"
+    tabindex="-1"
+    role="document"
+    aria-invalid="false"
+    aria-disabled="false"
+    class="sapUiTv sapUiTvAlignLeft"
+    style="direction:inherit">
+    Hello World 3 !!
+</span>
+-->
+</div>
+
+</body>
+
+</html>
