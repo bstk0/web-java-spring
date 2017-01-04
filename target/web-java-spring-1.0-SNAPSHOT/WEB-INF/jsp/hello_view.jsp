@@ -20,7 +20,9 @@
       %>
     </div>
     <br>
-    <a href="/helloui5.html">Hello UI5</a>
+    <br>UI5<br>
+    <a href="/helloui5.html">Hello UI5</a>&nbsp;|&nbsp;
+    <a href="/hello_eclipse/index.html">Hello_Eclipse UI5</a>
     <br>GAE<br>
     <a href="http://dbecodenvy.appspot.com/">dbecodenvy</a>&nbsp;|&nbsp;
     <a href="http://dbenginegae.appspot.com/index/index">dbenginegae</a>
