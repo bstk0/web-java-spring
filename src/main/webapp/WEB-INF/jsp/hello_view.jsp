@@ -25,6 +25,11 @@
     <a href="/hello_eclipse/index.html">Hello_Eclipse UI5</a>
     <br>GAE<br>
     <a href="http://dbecodenvy.appspot.com/">dbecodenvy</a>&nbsp;|&nbsp;
-    <a href="http://dbenginegae.appspot.com/index/index">dbenginegae</a>
+    <a href="http://dbenginegae.appspot.com/index/index">dbenginegae</a>&nbsp;|&nbsp; 
+    <br>Angular<br>
+    <a href="/angularMongo/index.html">Angular Mongo (mLab.com)</a>&nbsp;|&nbsp;
+    <br>React<br>
+    <a href="/react_index.html">REACT</a>&nbsp;|&nbsp;
+    <br>versao 2018.06.05<br>
   </body>
 </html>
