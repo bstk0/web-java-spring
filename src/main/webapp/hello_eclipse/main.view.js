@@ -173,7 +173,7 @@ table.bindRows("/");
    //LINK VOLTAR
    var linkVoltar = new sap.ui.commons.Link({
 text : "Voltar",
-href : "/",
+href : "../spring/hello",
 //target : "_blank"
 });
 
