@@ -1,0 +1,163 @@
+<html>
+
+<head>
+
+<script src="https://code.angularjs.org/1.0.2/angular.min.js"></script>
+<script src="https://code.angularjs.org/1.0.2/angular-resource.min.js"></script>
+
+</head>
+
+<div ng-app="alunos">
+    <a href="/"> Voltar </a><br>
+    <p class="alert">
+        This is a simple example on how to use AngularJS with MongoDB in the cloud (mLab)
+        Extraido do dbecodenvy para este projeto em 05.06.18 - 7.s
+    </p>
+  <h2>JavaScript alunoss</h2>
+  <div ng-view></div>
+
+  <!-- CACHE FILE: list.html -->
+  <script type="text/ng-template" id="list.html">
+    <h1> dentro do list </h1>
+    <input type="text" ng-model="search" class="search-query" placeholder="Search">
+    <table>
+      <thead>
+      <tr>
+        <th>alunos</th>
+        <th>Description</th>
+        <th><a href="#/new"><i class="icon-plus-sign"></i></a></th>
+      </tr>
+      </thead>
+      <tbody>
+      <!--
+      <tr ng-repeat="alunos in alunoss | filter:search | orderBy:'name'">
+        <td><a href="{{alunos.site}}" target="_blank">{{alunos.name}}</a></td>
+        <td>{{alunos.description}}</td>
+        <td>
+          <a href="#/edit/{{alunos._id.$oid}}"><i class="icon-pencil"></i></a>
+        </td>
+      </tr>
+      -->
+      <tr ng-repeat="alunos in alunoss | filter:search | orderBy:'nome'">
+        <td><a href="{{alunos.nome}}" target="_blank">{{alunos.nome}}</a></td>
+        <td>{{alunos.nome}}</td>
+        <td>
+          <a href="#/edit/{{alunos._id.$oid}}"><i class="icon-pencil"></i></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </script>
+
+
+
+  <!-- CACHE FILE: detail.html -->
+  <script type="text/ng-template" id="detail.html">
+    <form name="myForm">
+      <div class="control-group" ng-class="{error: myForm.name.$invalid}">
+        <label>Name</label>
+        <input type="text" name="name" ng-model="alunos.name" required>
+        <span ng-show="myForm.name.$error.required" class="help-inline">
+            Required</span>
+      </div>
+
+      <div class="control-group" ng-class="{error: myForm.site.$invalid}">
+        <label>Website</label>
+        <input type="url" name="site" ng-model="alunos.site" required>
+        <span ng-show="myForm.site.$error.required" class="help-inline">
+            Required</span>
+        <span ng-show="myForm.site.$error.url" class="help-inline">
+            Not a URL</span>
+      </div>
+
+      <label>Description</label>
+      <textarea name="description" ng-model="alunos.description"></textarea>
+
+      <br>
+      <a href="#/list" class="btn">Cancel</a>
+      <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid"
+              class="btn btn-primary">Save</button>
+      <button ng-click="destroy()"
+              ng-show="alunos._id" class="btn btn-danger">Delete</button>
+    </form>
+  </script>
+</div>
+
+<script>
+angular.module('alunos', ['mongolab']).
+  config(function($routeProvider) {
+    $routeProvider.
+      when('/list', {controller:ListCtrl, template:'list.html'}).
+      when('/edit/:alunosId', {controller:EditCtrl, template:'detail.html'}).
+      when('/new', {controller:CreateCtrl, template:'detail.html'}).
+      otherwise({redirectTo:'/list'});
+  });
+
+
+function ListCtrl($scope, alunos) {
+  $scope.alunoss = alunos.query();
+}
+
+
+function CreateCtrl($scope, $location, alunos) {
+  $scope.save = function() {
+    alunos.save($scope.alunos, function(alunos) {
+      $location.path('/edit/' + alunos._id.$oid);
+    });
+  }
+}
+
+
+function EditCtrl($scope, $location, $routeParams, alunos) {
+  var self = this;
+
+  alunos.get({id: $routeParams.alunosId}, function(alunos) {
+    self.original = alunos;
+    $scope.alunos = new alunos(self.original);
+  });
+
+  $scope.isClean = function() {
+    return angular.equals(self.original, $scope.alunos);
+  }
+
+  $scope.destroy = function() {
+    self.original.destroy(function() {
+      $location.path('/list');
+    });
+  };
+
+  $scope.save = function() {
+    $scope.alunos.update(function() {
+      $location.path('/list');
+    });
+  };
+}
+
+// This is a module for cloud persistance in mongolab - https://mongolab.com
+//key : jb2CVX00oFjyU7TCzpzLqj2p_yK0uASz
+//https://api.mlab.com/api/1/databases?apiKey=jb2CVX00oFjyU7TCzpzLqj2p_yK0uASz
+angular.module('mongolab', ['ngResource']).
+    factory('alunos', function($resource) {
+      var alunoss = $resource('https://api.mongolab.com/api/1/databases' +
+          '/dbe/collections/alunos/:id',
+          { apiKey: 'jb2CVX00oFjyU7TCzpzLqj2p_yK0uASz' }, 
+          { update: { method: 'PUT' }
+          }
+      );
+
+      alunoss.prototype.update = function(cb) {
+        return alunos.update({id: this._id.$oid},
+            angular.extend({}, this, {_id:undefined}), cb);
+      };
+
+      alunoss.prototype.destroy = function(cb) {
+        return alunos.remove({id: this._id.$oid}, cb);
+      };
+
+      return alunoss;
+    });
+
+</script>
+
+
+</html>
