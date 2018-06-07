@@ -20,6 +20,18 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.odata4j/odata4j-core -->
+        <dependency>
+            <groupId>org.odata4j</groupId>
+            <artifactId>odata4j-core</artifactId>
+            <version>0.7.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.odata4j/odata4j-jersey -->
+        <dependency>
+            <groupId>org.odata4j</groupId>
+            <artifactId>odata4j-jersey</artifactId>
+            <version>0.7.0</version>
+        </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
